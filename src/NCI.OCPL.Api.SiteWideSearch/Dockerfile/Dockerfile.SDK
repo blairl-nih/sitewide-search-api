@@ -18,6 +18,6 @@ ENTRYPOINT ["dotnet", "NCI.OCPL.Api.SiteWideSearch.dll"]
 
 # Test API availability by performing search and autosuggest operations, each returning  at least one result.
 # If both are successful, exit with a zero status, otherwise exit with status of one.
-HEALTHCHECK --interval=1m CMD curl -f --silent -XGET http://localhost:5008/search/cgov/en/lung+cancer > /dev/null \
-        && curl -f --silent -XGET http://localhost:5008/autosuggest/cgov/en/breast > /dev/null \
+HEALTHCHECK --interval=1m CMD curl -f --silent -XGET http://localhost:5008/search/status > /dev/null \
+        && curl -f --silent -XGET http://localhost:5008/autosuggest/status > /dev/null \
         && exit 0 || exit 1
