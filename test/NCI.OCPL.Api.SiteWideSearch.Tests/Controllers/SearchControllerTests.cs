@@ -51,7 +51,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         /// Helper method to build a SearchTemplateRequest in a more compact manner
         /// </summary>
         /// <param name="index">The index to fetch from</param>
-        /// <param name="file">The template file to use</param>
+        /// <param name="id">The template id to use</param>
         /// <param name="term">The search term we are looking for</param>
         /// <param name="size">The result set size</param>
         /// <param name="from">Where to start the results from</param>
@@ -60,7 +60,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         /// <returns>A SearchTemplateRequest</returns>
         private SearchTemplateRequest<SiteWideSearchResult> GetSearchRequest(
             string index,
-            string file,
+            string id,
             string term,
             int size,
             int from,
@@ -69,7 +69,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         ) {
 
             SearchTemplateRequest<SiteWideSearchResult> expReq = new SearchTemplateRequest<SiteWideSearchResult>(index){
-                File = file
+                Id = id
             };
 
             expReq.Params = new Dictionary<string, object>();
@@ -438,7 +438,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
 
         [Theory]
         [InlineData("ESHealthData/red.json")]
-        [InlineData("ESHealthData/unexpected.json")]   // i.e. "Unexpected color"
+        //[InlineData("ESHealthData/unexpected.json")]   // i.e. "Unexpected color" -- it seems like 5.6 does not have this status
         public void GetStatus_Unhealthy(string datafile)
         {
             IOptions<SearchIndexOptions> config = GetMockSearchIndexConfig();

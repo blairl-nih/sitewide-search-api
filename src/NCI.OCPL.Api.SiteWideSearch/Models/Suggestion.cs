@@ -9,7 +9,7 @@ namespace NCI.OCPL.Api.SiteWideSearch
         /// The Backend ID for this item
         /// </summary>
         /// <returns></returns>
-        [String(Name = "term")]
+        [Text(Name = "term")]
         public string Term { get; set; }
 
     }

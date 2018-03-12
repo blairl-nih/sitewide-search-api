@@ -15,28 +15,28 @@ namespace NCI.OCPL.Api.SiteWideSearch
         /// The title of this item 
         /// </summary>
         /// <returns></returns>
-        [String(Name = "title")]
+        [Text(Name = "title")]
         public string Title { get; set; }
 
         /// <summary>
         /// The URL for this result
         /// </summary>
         /// <returns></returns>
-        [String(Name = "url")]
+        [Text(Name = "url")]
         public string URL { get; set; }
 
         /// <summary>
         /// Gets the content type of this result if there is one
         /// </summary>
         /// <returns></returns>
-        [String(Name = "metatag-dcterms-type")]
+        [Text(Name = "metatag-dcterms-type")]
         public string ContentType { get; set; }
 
         /// <summary>
         /// Gets the description of this result
         /// </summary>
         /// <returns></returns>
-        [String(Name = "metatag-description")]
+        [Text(Name = "metatag-description")]
         public string Description { get; set; }
 
     }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 
 namespace NCI.OCPL.Api.SiteWideSearch
@@ -13,6 +13,7 @@ namespace NCI.OCPL.Api.SiteWideSearch
     {
         public static void Main(string[] args)
         {
+            /*
             var config = new ConfigurationBuilder()
                 .AddCommandLine(args)
                 .AddEnvironmentVariables(prefix: "ASPNETCORE_")
@@ -27,6 +28,13 @@ namespace NCI.OCPL.Api.SiteWideSearch
                 .Build();
 
             host.Run();
+            */
+            BuildWebHost(args).Run();
         }
+
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)                          
+                .UseStartup<Startup>()
+                .Build();
     }
 }

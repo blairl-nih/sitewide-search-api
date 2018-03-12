@@ -31,7 +31,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.AutoSuggestControllerTests
 
         [Theory]
         [InlineData("ESHealthData/red.json")]
-        [InlineData("ESHealthData/unexpected.json")]   // i.e. "Unexpected color"
+        //[InlineData("ESHealthData/unexpected.json")]   // i.e. "Unexpected color" - it appears as if 5.6.x does not have unexpected
         public void GetStatus_Unhealthy(string datafile)
         {
             IOptions<AutosuggestIndexOptions> config = GetMockedAutosuggestIndexOptions();
