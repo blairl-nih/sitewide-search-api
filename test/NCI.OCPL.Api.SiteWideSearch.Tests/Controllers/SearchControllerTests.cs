@@ -123,7 +123,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
                 term,                   // Search term
                 10,                     // Max number of records to retrieve.
                 0,                      // Offset of first record to retrieve.
-                "\"url\", \"title\", \"metatag-description\", \"metatag-dcterms-type\"",
+                "\"url\", \"title\", \"metatag.description\", \"metatag.dcterms.type\"",
                 "all"
             );
 
@@ -164,7 +164,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
                 "breast cancer"
             );
 
-            Assert.Equal(13858, results.TotalResults);
+            Assert.Equal(12915, results.TotalResults);
         }
 
         [Fact]
@@ -293,8 +293,8 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         public static IEnumerable<object[]> FieldData => new[]
                 {
                     new  object[]{0, (Func<SiteWideSearchResult, Boolean>)(x => x.Title == null ), "title" },
-                    new  object[]{1, (Func<SiteWideSearchResult, Boolean>)(x => x.Description == null ), "metatag-description" },
-                    new  object[]{2, (Func<SiteWideSearchResult, Boolean>)(x => x.ContentType == null ), "metatag-dcterms-type" }
+                    new  object[]{1, (Func<SiteWideSearchResult, Boolean>)(x => x.Description == null ), "metatag.description" },
+                    new  object[]{2, (Func<SiteWideSearchResult, Boolean>)(x => x.ContentType == null ), "metatag.dcterms.type" }
                 };
 
     }

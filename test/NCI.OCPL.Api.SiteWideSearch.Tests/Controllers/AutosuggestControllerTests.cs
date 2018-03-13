@@ -273,7 +273,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.AutoSuggestControllerTests
                 "autosg_suggest_cgov_en",  // Template name, preceded by the name of the directory it's stored in.
                 term,                   // Search term
                 10,                     // Max number of records to retrieve.
-                "\"url\", \"title\", \"metatag-description\", \"metatag-dcterms-type\"",
+                "\"url\", \"title\", \"metatag.description\", \"metatag.dcterms.type\"",
                 "all"
             );
 

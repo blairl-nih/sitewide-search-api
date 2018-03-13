@@ -3,14 +3,12 @@
 
     POST cgov/doc/_search/template
     {
-        "template": {
-            "file": "cgov_search_cgov_en" 
-        },
+        "file": "cgov_search_cgov_en",
         "params": {
             "my_value" : "znsasazdazaz"
             ,"my_size" : 10
             , "my_from" : 0
-            ,"my_fields": "\"url\", \"title\", \"metatag-description\", \"metatag-dcterms-type\""
+            ,"my_fields": "\"url\", \"title\", \"metatag.description\", \"metatag.dcterms.type\""
             , "my_site": "all"
         }
     }
