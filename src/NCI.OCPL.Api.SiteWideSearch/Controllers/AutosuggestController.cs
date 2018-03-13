@@ -76,7 +76,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
             //TODO: Catch Exception
             var response = _elasticClient.SearchTemplate<Suggestion>(sd => sd
                 .Index(_indexConfig.AliasName)
-                .Id(templateName)
+                .File(templateName)
                 .Params(pd => pd
                     .Add("searchstring", term)
                     .Add("my_size", 10)
@@ -126,8 +126,8 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
                 throw new APIErrorException(500, "Errors Occurred.");
             }
 
-            if (response.Status != Elasticsearch.Net.Health.Green
-                && response.Status != Elasticsearch.Net.Health.Yellow)
+            if (response.Status != "green"
+                && response.Status != "yellow")
             {
                 _logger.LogError("Elasticsearch not healthy. Index status is '{0}'.", response.Status);
                 throw new APIErrorException(500, "Service not healthy.");

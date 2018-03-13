@@ -15,8 +15,13 @@ namespace NCI.OCPL.Api.SiteWideSearch
 
         public Suggestions(long totalResults, IEnumerable<Suggestion> results)
         {
-            Results = results.ToArray();
+            if (results != null)
+            {
+                Results = results.ToArray();
+            }
+
             Total = totalResults;
+
         }
 
 

@@ -51,7 +51,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         /// Helper method to build a SearchTemplateRequest in a more compact manner
         /// </summary>
         /// <param name="index">The index to fetch from</param>
-        /// <param name="id">The template id to use</param>
+        /// <param name="fileName">The template fileName to use</param>
         /// <param name="term">The search term we are looking for</param>
         /// <param name="size">The result set size</param>
         /// <param name="from">Where to start the results from</param>
@@ -60,7 +60,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         /// <returns>A SearchTemplateRequest</returns>
         private SearchTemplateRequest<SiteWideSearchResult> GetSearchRequest(
             string index,
-            string id,
+            string fileName,
             string term,
             int size,
             int from,
@@ -69,7 +69,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         ) {
 
             SearchTemplateRequest<SiteWideSearchResult> expReq = new SearchTemplateRequest<SiteWideSearchResult>(index){
-                Id = id
+                File = fileName
             };
 
             expReq.Params = new Dictionary<string, object>();
