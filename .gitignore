@@ -238,3 +238,6 @@ launchsettings.json
 
 # FAKE - F# Make
 .fake/
+
+# development appsettings
+appsettings.*.json
