@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,38 +15,33 @@ using Microsoft.Extensions.Logging;
 using Nest;
 using Elasticsearch.Net;
 using System.Text;
+using NSwag.AspNetCore;
+using System.Reflection;
+using NJsonSchema;
 
 namespace NCI.OCPL.Api.SiteWideSearch
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddLogging();
+
             //Turn on the OptionsManager that supports IOptions
             services.AddOptions();
 
             // Add configuration mappings
             services.Configure<SearchIndexOptions>(Configuration.GetSection("SearchIndexOptions"));
             services.Configure<AutosuggestIndexOptions>(Configuration.GetSection("AutosuggestIndexOptions"));
-
-            // Create CORS policies.
-            services.AddCors();
-
-            // Add framework services.
-            services.AddMvc();
 
             // This will inject an IElasticClient using our configuration into any
             // controllers that take an IElasticClient parameter into its constructor.
@@ -73,10 +69,16 @@ namespace NCI.OCPL.Api.SiteWideSearch
                 //Return a new instance of an ElasticClient with our settings
                 ConnectionSettings settings = new ConnectionSettings(connectionPool)
                     .BasicAuthentication(username, password);
-                                                
+
+                if (Configuration.GetValue<bool>("Elasticsearch:EnableDebugging", false)) {
+                    settings = settings.DisableDirectStreaming();                   
+                }
+                                                                
                 return new ElasticClient(settings);
             });
 
+            // Add framework services.
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,6 +86,13 @@ namespace NCI.OCPL.Api.SiteWideSearch
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseStaticFiles();
+            // Enable the Swagger UI middleware and the Swagger generator
+            app.UseSwaggerUi3(typeof(Startup).GetTypeInfo().Assembly, settings =>
+            {
+                settings.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
+            });
 
             // Allow use from anywhere.
             app.UseCors(builder => builder.AllowAnyOrigin());
