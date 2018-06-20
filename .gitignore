@@ -241,3 +241,8 @@ launchsettings.json
 
 # development appsettings
 appsettings.*.json
+
+.vscode/launch.json
+.vscode/tasks.json
+coverage.json
+lcov.info
