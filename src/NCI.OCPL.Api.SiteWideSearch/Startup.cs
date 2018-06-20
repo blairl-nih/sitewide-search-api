@@ -39,6 +39,9 @@ namespace NCI.OCPL.Api.SiteWideSearch
             //Turn on the OptionsManager that supports IOptions
             services.AddOptions();
 
+            //Adding CORS service
+            services.AddCors();
+
             // Add configuration mappings
             services.Configure<SearchIndexOptions>(Configuration.GetSection("SearchIndexOptions"));
             services.Configure<AutosuggestIndexOptions>(Configuration.GetSection("AutosuggestIndexOptions"));
@@ -92,6 +95,7 @@ namespace NCI.OCPL.Api.SiteWideSearch
             app.UseSwaggerUi3(typeof(Startup).GetTypeInfo().Assembly, settings =>
             {
                 settings.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
+                settings.SwaggerUiRoute = "";
             });
 
             // Allow use from anywhere.
@@ -125,6 +129,14 @@ namespace NCI.OCPL.Api.SiteWideSearch
                         byte[] contents = Encoding.UTF8.GetBytes(new ErrorMessage(){
                             Message = message
                         }.ToString());
+
+                        // HACK: This is a fix for a bug in .NET Core and the CORS middleware
+                        // When the pull request that fixes the timing of setting the CORS header (https://github.com/aspnet/CORS/pull/163) goes through,
+                        // we should remove this and test to see if it works without the hack.
+                        if (context.Request.Headers.ContainsKey("Origin"))
+                        {
+                            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                        }
 
                         await context.Response.Body.WriteAsync(contents, 0, contents.Length);
                     }

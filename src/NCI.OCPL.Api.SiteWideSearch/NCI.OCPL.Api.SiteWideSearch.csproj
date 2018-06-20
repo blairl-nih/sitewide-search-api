@@ -27,8 +27,8 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
-    <PackageReference Include="NSwag.AspNetCore" Version="11.17.1" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
+    <PackageReference Include="NSwag.AspNetCore" Version="11.17.15" />
   </ItemGroup>
 
 </Project>
