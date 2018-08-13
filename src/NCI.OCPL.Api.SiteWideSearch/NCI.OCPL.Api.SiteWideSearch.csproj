@@ -9,6 +9,10 @@
     <PackageId>NCI.OCPL.Api.SiteWideSearch</PackageId>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="NEST" Version="5.6.0" />
     <PackageReference Include="Elasticsearch.Net" Version="5.6.0" />

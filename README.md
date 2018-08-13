@@ -48,10 +48,18 @@ Reference: [Microsoft Configuration introduction](https://docs.microsoft.com/en-
 ## Build
 ```
 cd sitewide-search-api
-dotnet restore #install NuGet packages
-cd test/NCI.OCPL.Api.SiteWideSearch.Tests
-dotnet build # builds all projects (test are dependent on src)
-dotnet test #runs unit tests
+
+# install NuGet packages
+dotnet restore
+# builds all projects (test are dependent on src)
+dotnet build
+# runs unit tests (only in tests folder)
+dotnet test test/**
+# Run code coverage 
+# (../../lcov is because this will run from the test project...)
+dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=../../lcov test/**
+# Publish to publish directory
+dotnet publish -c Release -o ../../publish src/NCI.OCPL.Api.SiteWideSearch
 ```
 
 
