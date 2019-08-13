@@ -51,7 +51,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         /// Helper method to build a SearchTemplateRequest in a more compact manner
         /// </summary>
         /// <param name="index">The index to fetch from</param>
-        /// <param name="file">The template file to use</param>
+        /// <param name="fileName">The template fileName to use</param>
         /// <param name="term">The search term we are looking for</param>
         /// <param name="size">The result set size</param>
         /// <param name="from">Where to start the results from</param>
@@ -60,7 +60,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         /// <returns>A SearchTemplateRequest</returns>
         private SearchTemplateRequest<SiteWideSearchResult> GetSearchRequest(
             string index,
-            string file,
+            string fileName,
             string term,
             int size,
             int from,
@@ -69,7 +69,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         ) {
 
             SearchTemplateRequest<SiteWideSearchResult> expReq = new SearchTemplateRequest<SiteWideSearchResult>(index){
-                File = file
+                File = fileName
             };
 
             expReq.Params = new Dictionary<string, object>();
@@ -123,7 +123,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
                 term,                   // Search term
                 10,                     // Max number of records to retrieve.
                 0,                      // Offset of first record to retrieve.
-                "\"url\", \"title\", \"metatag-description\", \"metatag-dcterms-type\"",
+                "\"url\", \"title\", \"metatag.description\", \"metatag.dcterms.type\"",
                 "all"
             );
 
@@ -164,7 +164,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
                 "breast cancer"
             );
 
-            Assert.Equal(13858, results.TotalResults);
+            Assert.Equal(12915, results.TotalResults);
         }
 
         [Fact]
@@ -293,8 +293,8 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         public static IEnumerable<object[]> FieldData => new[]
                 {
                     new  object[]{0, (Func<SiteWideSearchResult, Boolean>)(x => x.Title == null ), "title" },
-                    new  object[]{1, (Func<SiteWideSearchResult, Boolean>)(x => x.Description == null ), "metatag-description" },
-                    new  object[]{2, (Func<SiteWideSearchResult, Boolean>)(x => x.ContentType == null ), "metatag-dcterms-type" }
+                    new  object[]{1, (Func<SiteWideSearchResult, Boolean>)(x => x.Description == null ), "metatag.description" },
+                    new  object[]{2, (Func<SiteWideSearchResult, Boolean>)(x => x.ContentType == null ), "metatag.dcterms.type" }
                 };
 
     }
@@ -438,7 +438,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
 
         [Theory]
         [InlineData("ESHealthData/red.json")]
-        [InlineData("ESHealthData/unexpected.json")]   // i.e. "Unexpected color"
+        //[InlineData("ESHealthData/unexpected.json")]   // i.e. "Unexpected color" -- it seems like 5.6 does not have this status
         public void GetStatus_Unhealthy(string datafile)
         {
             IOptions<SearchIndexOptions> config = GetMockSearchIndexConfig();

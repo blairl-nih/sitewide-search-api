@@ -6,14 +6,12 @@
 
     POST cgov/doc/_search/template
     {
-        "template": {
-            "file": "cgov_search_cgov_en" 
-        },
+        "file": "cgov_search_cgov_en",
         "params": {
             "my_value" : "breast cancer"
             ,"my_size" : 10
             , "my_from" : 0
-            ,"my_fields": "\"url\", \"title\", \"metatag-description\", \"metatag-dcterms-type\""
+            ,"my_fields": "\"url\", \"title\", \"metatag.description\", \"metatag.dcterms.type\""
             , "my_site": "all"
         }
     }
@@ -36,8 +34,8 @@
             "_id": "http://www.cancer.gov/types/breast",
             "_score": 3.6831203,
             "_source": {
-               "metatag-description": "Information about breast cancer treatment, prevention, genetics, causes, screening, clinical trials, research and statistics from the National Cancer Institute.",
-               "metatag-dcterms-type": "cgvCancerTypeHome",
+               "metatag.description": "Information about breast cancer treatment, prevention, genetics, causes, screening, clinical trials, research and statistics from the National Cancer Institute.",
+               "metatag.dcterms.type": "cgvCancerTypeHome",
                "url": "http://www.cancer.gov/types/breast"
             }
          },
@@ -48,7 +46,7 @@
             "_score": 3.6548882,
             "_source": {
                "title": "Breast Cancer—Health Professional Version - National Cancer Institute",
-               "metatag-dcterms-type": "cgvCancerTypeHome",
+               "metatag.dcterms.type": "cgvCancerTypeHome",
                "url": "http://www.cancer.gov/types/breast/hp"
             }
          },
@@ -59,7 +57,7 @@
             "_score": 3.1173148,
             "_source": {
                "title": "Breast Cancer Prevention (PDQ®)—Patient Version - National Cancer Institute",
-               "metatag-description": "Expert-reviewed information summary about factors that may increase the risk of developing breast cancer and about research aimed at the prevention of this disease.",
+               "metatag.description": "Expert-reviewed information summary about factors that may increase the risk of developing breast cancer and about research aimed at the prevention of this disease.",
                "url": "http://www.cancer.gov/types/breast/patient/breast-prevention-pdq"
             }
          },
@@ -70,8 +68,8 @@
             "_score": 3.1060343,
             "_source": {
                "title": "A Snapshot of Breast Cancer - National Cancer Institute",
-               "metatag-description": "Information on trends in incidence, mortality, and NCI funding for breast cancer; examples of related NCI initiatives and selected research advances.",
-               "metatag-dcterms-type": "cgvArticle",
+               "metatag.description": "Information on trends in incidence, mortality, and NCI funding for breast cancer; examples of related NCI initiatives and selected research advances.",
+               "metatag.dcterms.type": "cgvArticle",
                "url": "http://www.cancer.gov/research/progress/snapshots/breast"
             }
          },
@@ -82,8 +80,8 @@
             "_score": 3.100222,
             "_source": {
                "title": "Breast Cancer Screening (PDQ®)—Patient Version - National Cancer Institute",
-               "metatag-description": "Expert-reviewed information summary about tests used to detect or screen for breast cancer.",
-               "metatag-dcterms-type": "pdqCancerInfoSummary",
+               "metatag.description": "Expert-reviewed information summary about tests used to detect or screen for breast cancer.",
+               "metatag.dcterms.type": "pdqCancerInfoSummary",
                "url": "http://www.cancer.gov/types/breast/patient/breast-screening-pdq"
             }
          }

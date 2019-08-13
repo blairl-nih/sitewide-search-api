@@ -154,8 +154,8 @@ namespace NCI.OCPL.Utils.Testing
                 //Initial test is that both objects are not null.
                 bool isEqual =  
                     x.Id == y.Id &&
-                    x.File == y.File &&                    
-                    x.Template == y.Template;
+                    x.File == y.File &&
+                     x.Inline == y.Inline;
 
                 if (isEqual) 
                 {

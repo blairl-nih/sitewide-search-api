@@ -3,150 +3,150 @@
 
     POST cgov/doc/_search/template
     {
-        "template": {
-            "file": "cgov_search_cgov_en" 
-        },
+        
+        "file": "cgov_search_cgov_en",
         "params": {
             "my_value" : "breast cancer"
             ,"my_size" : 10
             , "my_from" : 0
-            ,"my_fields": "\"url\", \"title\", \"metatag-description\", \"metatag-dcterms-type\""
+            ,"my_fields": "\"url\", \"title\", \"metatag.description\", \"metatag.dcterms.type\""
             , "my_site": "all"
         }
     }
 */
 {
-   "took": 381,
-   "timed_out": false,
-   "_shards": {
-      "total": 1,
-      "successful": 1,
-      "failed": 0
-   },
-   "hits": {
-      "total": 13858,
-      "max_score": 3.6831203,
-      "hits": [
-         {
-            "_index": "sitewidesearch12",
-            "_type": "doc",
-            "_id": "http://www.cancer.gov/types/breast",
-            "_score": 3.6831203,
-            "_source": {
-               "title": "Breast Cancer—Patient Version - National Cancer Institute",
-               "metatag-description": "Information about breast cancer treatment, prevention, genetics, causes, screening, clinical trials, research and statistics from the National Cancer Institute.",
-               "metatag-dcterms-type": "cgvCancerTypeHome",
-               "url": "http://www.cancer.gov/types/breast"
-            }
-         },
-         {
-            "_index": "sitewidesearch12",
-            "_type": "doc",
-            "_id": "http://www.cancer.gov/types/breast/hp",
-            "_score": 3.6548882,
-            "_source": {
-               "title": "Breast Cancer—Health Professional Version - National Cancer Institute",
-               "metatag-description": "NCI's gateway for information about breast cancer.",
-               "metatag-dcterms-type": "cgvCancerTypeHome",
-               "url": "http://www.cancer.gov/types/breast/hp"
-            }
-         },
-         {
-            "_index": "sitewidesearch12",
-            "_type": "doc",
-            "_id": "http://www.cancer.gov/types/breast/patient/breast-prevention-pdq",
-            "_score": 3.1173148,
-            "_source": {
-               "title": "Breast Cancer Prevention (PDQ®)—Patient Version - National Cancer Institute",
-               "metatag-description": "Expert-reviewed information summary about factors that may increase the risk of developing breast cancer and about research aimed at the prevention of this disease.",
-               "metatag-dcterms-type": "pdqCancerInfoSummary",
-               "url": "http://www.cancer.gov/types/breast/patient/breast-prevention-pdq"
-            }
-         },
-         {
-            "_index": "sitewidesearch12",
-            "_type": "doc",
-            "_id": "http://www.cancer.gov/research/progress/snapshots/breast",
-            "_score": 3.1060343,
-            "_source": {
-               "title": "A Snapshot of Breast Cancer - National Cancer Institute",
-               "metatag-description": "Information on trends in incidence, mortality, and NCI funding for breast cancer; examples of related NCI initiatives and selected research advances.",
-               "metatag-dcterms-type": "cgvArticle",
-               "url": "http://www.cancer.gov/research/progress/snapshots/breast"
-            }
-         },
-         {
-            "_index": "sitewidesearch12",
-            "_type": "doc",
-            "_id": "http://www.cancer.gov/types/breast/patient/breast-screening-pdq",
-            "_score": 3.100222,
-            "_source": {
-               "title": "Breast Cancer Screening (PDQ®)—Patient Version - National Cancer Institute",
-               "metatag-description": "Expert-reviewed information summary about tests used to detect or screen for breast cancer.",
-               "metatag-dcterms-type": "pdqCancerInfoSummary",
-               "url": "http://www.cancer.gov/types/breast/patient/breast-screening-pdq"
-            }
-         },
-         {
-            "_index": "sitewidesearch12",
-            "_type": "doc",
-            "_id": "http://www.cancer.gov/types/breast/research",
-            "_score": 3.0991673,
-            "_source": {
-               "title": "Breast Cancer Research - National Cancer Institute",
-               "metatag-description": "Find research articles on breast cancer, which may include news stories, clinical trials, blog posts, and descriptions of active studies.",
-               "metatag-dcterms-type": "cgvCancerResearch",
-               "url": "http://www.cancer.gov/types/breast/research"
-            }
-         },
-         {
-            "_index": "sitewidesearch12",
-            "_type": "doc",
-            "_id": "http://www.cancer.gov/types/breast/ibc-fact-sheet",
-            "_score": 3.0962787,
-            "_source": {
-               "title": "Inflammatory Breast Cancer - National Cancer Institute",
-               "metatag-description": "A fact sheet about the diagnosis and treatment of inflammatory breast cancer (IBC), an uncommon type of cancer in which the breast becomes red, swollen, and warm.",
-               "metatag-dcterms-type": "cgvFactSheet",
-               "url": "http://www.cancer.gov/types/breast/ibc-fact-sheet"
-            }
-         },
-         {
-            "_index": "sitewidesearch12",
-            "_type": "doc",
-            "_id": "http://www.cancer.gov/types/breast/hp/breast-prevention-pdq",
-            "_score": 3.0889993,
-            "_source": {
-               "title": "Breast Cancer Prevention (PDQ®)—Health Professional Version - National Cancer Institute",
-               "metatag-description": "Expert-reviewed information summary about factors that may increase the risk of developing breast cancer and about research aimed at the prevention of this disease.",
-               "metatag-dcterms-type": "pdqCancerInfoSummary",
-               "url": "http://www.cancer.gov/types/breast/hp/breast-prevention-pdq"
-            }
-         },
-         {
-            "_index": "sitewidesearch12",
-            "_type": "doc",
-            "_id": "http://www.cancer.gov/types/breast/patient/breast-treatment-pdq",
-            "_score": 3.0815525,
-            "_source": {
-               "title": "Breast Cancer Treatment (PDQ®)—Patient Version - National Cancer Institute",
-               "metatag-description": "Expert-reviewed information summary about the treatment of ductal carcinoma in situ and invasive breast cancer.",
-               "metatag-dcterms-type": "pdqCancerInfoSummary",
-               "url": "http://www.cancer.gov/types/breast/patient/breast-treatment-pdq"
-            }
-         },
-         {
-            "_index": "sitewidesearch12",
-            "_type": "doc",
-            "_id": "http://www.cancer.gov/types/breast/hp/breast-screening-pdq",
-            "_score": 3.0705333,
-            "_source": {
-               "title": "Breast Cancer Screening (PDQ®)—Health Professional Version - National Cancer Institute",
-               "metatag-description": "Expert-reviewed information summary about tests used to detect or screen for breast cancer.",
-               "metatag-dcterms-type": "pdqCancerInfoSummary",
-               "url": "http://www.cancer.gov/types/breast/hp/breast-screening-pdq"
-            }
-         }
-      ]
-   }
+  "took": 67,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": 12915,
+    "max_score": 11.96958,
+    "hits": [
+      {
+        "_index": "sitewidesearch_es56",
+        "_type": "doc",
+        "_id": "https://www.cancer.gov/types/breast",
+        "_score": 11.96958,
+        "_source": {
+          "metatag.description": "Information about breast cancer treatment, prevention, genetics, causes, screening, clinical trials, research and statistics from the National Cancer Institute.",
+          "metatag.dcterms.type": "cgvCancerTypeHome",
+          "title": "Breast Cancer—Patient Version - National Cancer Institute",
+          "url": "https://www.cancer.gov/types/breast"
+        }
+      },
+      {
+        "_index": "sitewidesearch_es56",
+        "_type": "doc",
+        "_id": "https://www.cancer.gov/types/breast/hp",
+        "_score": 11.941692,
+        "_source": {
+          "metatag.description": "NCI's gateway for information about breast cancer.",
+          "metatag.dcterms.type": "cgvCancerTypeHome",
+          "title": "Breast Cancer—Health Professional Version - National Cancer Institute",
+          "url": "https://www.cancer.gov/types/breast/hp"
+        }
+      },
+      {
+        "_index": "sitewidesearch_es56",
+        "_type": "doc",
+        "_id": "https://www.cancer.gov/types/breast/research",
+        "_score": 11.194487,
+        "_source": {
+          "metatag.description": "Find research articles on breast cancer, which may include news stories, clinical trials, blog posts, and descriptions of active studies.",
+          "metatag.dcterms.type": "cgvCancerResearch",
+          "title": "Breast Cancer Research - National Cancer Institute",
+          "url": "https://www.cancer.gov/types/breast/research"
+        }
+      },
+      {
+        "_index": "sitewidesearch_es56",
+        "_type": "doc",
+        "_id": "https://www.cancer.gov/types/breast/hp/breast-prevention-pdq",
+        "_score": 11.190392,
+        "_source": {
+          "metatag.description": "Risk factors for breast cancer are female sex and advancing age, inherited risk, breast density, obesity, alcohol consumption, and exposure to ionizing radiation.  Interventions to prevent breast cancer include chemoprevention (e.g. SERMs, AIs), risk-reducing surgery (e.g. mastectomy, oophorectomy).  Review the evidence on risk factors and interventions to prevent breast cancer in this expert-reviewed summary.",
+          "metatag.dcterms.type": "pdqCancerInfoSummary",
+          "title": "Breast Cancer Prevention (PDQ®)—Health Professional Version - National Cancer Institute",
+          "url": "https://www.cancer.gov/types/breast/hp/breast-prevention-pdq"
+        }
+      },
+      {
+        "_index": "sitewidesearch_es56",
+        "_type": "doc",
+        "_id": "https://www.cancer.gov/types/breast/patient/breast-prevention-pdq",
+        "_score": 11.189875,
+        "_source": {
+          "metatag.description": "Expert-reviewed information summary about factors that may increase the risk of developing breast cancer and about research aimed at the prevention of this disease.",
+          "metatag.dcterms.type": "pdqCancerInfoSummary",
+          "title": "Breast Cancer Prevention (PDQ®)—Patient Version - National Cancer Institute",
+          "url": "https://www.cancer.gov/types/breast/patient/breast-prevention-pdq"
+        }
+      },
+      {
+        "_index": "sitewidesearch_es56",
+        "_type": "doc",
+        "_id": "https://www.cancer.gov/types/breast/patient/breast-screening-pdq",
+        "_score": 11.184347,
+        "_source": {
+          "metatag.description": "Mammogram, clinical breast exam (CBE), and MRI (magnetic resonance imaging) tests are used to screen for breast cancer. Learn about this and other tests that have been studied to detect or screen for breast cancer in this expert-reviewed summary.",
+          "metatag.dcterms.type": "pdqCancerInfoSummary",
+          "title": "Breast Cancer Screening (PDQ®)—Patient Version - National Cancer Institute",
+          "url": "https://www.cancer.gov/types/breast/patient/breast-screening-pdq"
+        }
+      },
+      {
+        "_index": "sitewidesearch_es56",
+        "_type": "doc",
+        "_id": "https://www.cancer.gov/types/breast/patient/breast-treatment-pdq",
+        "_score": 11.177835,
+        "_source": {
+          "metatag.description": "Expert-reviewed information summary about the treatment of ductal carcinoma in situ and invasive breast cancer.",
+          "metatag.dcterms.type": "pdqCancerInfoSummary",
+          "title": "Breast Cancer Treatment (PDQ®)—Patient Version - National Cancer Institute",
+          "url": "https://www.cancer.gov/types/breast/patient/breast-treatment-pdq"
+        }
+      },
+      {
+        "_index": "sitewidesearch_es56",
+        "_type": "doc",
+        "_id": "https://www.cancer.gov/types/breast/ibc-fact-sheet",
+        "_score": 11.177172,
+        "_source": {
+          "metatag.description": "A fact sheet about the diagnosis and treatment of inflammatory breast cancer (IBC), an uncommon type of cancer in which the breast becomes red, swollen, and warm.",
+          "metatag.dcterms.type": "cgvFactSheet",
+          "title": "Inflammatory Breast Cancer - National Cancer Institute",
+          "url": "https://www.cancer.gov/types/breast/ibc-fact-sheet"
+        }
+      },
+      {
+        "_index": "sitewidesearch_es56",
+        "_type": "doc",
+        "_id": "https://www.cancer.gov/types/breast/hp/breast-treatment-pdq",
+        "_score": 11.16828,
+        "_source": {
+          "metatag.description": "Expert-reviewed information summary about the treatment of ductal carcinoma in situ, lobular carcinoma in situ, and invasive breast cancer.",
+          "metatag.dcterms.type": "pdqCancerInfoSummary",
+          "title": "Breast Cancer Treatment (PDQ®)—Health Professional Version - National Cancer Institute",
+          "url": "https://www.cancer.gov/types/breast/hp/breast-treatment-pdq"
+        }
+      },
+      {
+        "_index": "sitewidesearch_es56",
+        "_type": "doc",
+        "_id": "https://www.cancer.gov/about-cancer/causes-prevention/risk/myths/antiperspirants-fact-sheet",
+        "_score": 11.161331,
+        "_source": {
+          "metatag.description": "A fact sheet describing studies on whether there is a link between underarm antiperspirants or deodorants and breast cancer.",
+          "metatag.dcterms.type": "cgvFactSheet",
+          "title": "Antiperspirants/Deodorants and Breast Cancer - National Cancer Institute",
+          "url": "https://www.cancer.gov/about-cancer/causes-prevention/risk/myths/antiperspirants-fact-sheet"
+        }
+      }
+    ]
+  }
 }

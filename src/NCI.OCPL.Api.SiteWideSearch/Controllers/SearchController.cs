@@ -77,7 +77,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
             //TODO: Make this a parameter that can take in a list of fields and turn them
             //into this string.
             // Setup the list of fields we want ES to return.
-            string fields = "\"url\", \"title\", \"metatag-description\", \"metatag-dcterms-type\"";            
+            string fields = "\"url\", \"title\", \"metatag.description\", \"metatag.dcterms.type\"";
 
             //thios Can throw exception
             var response = _elasticClient.SearchTemplate<SiteWideSearchResult>(sd => sd

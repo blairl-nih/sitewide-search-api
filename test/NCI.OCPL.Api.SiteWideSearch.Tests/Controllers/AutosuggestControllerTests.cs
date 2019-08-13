@@ -45,23 +45,23 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.AutoSuggestControllerTests
         /// Helper method to build a SearchTemplateRequest for testing purposes.
         /// </summary>
         /// <param name="index">The index to fetch from</param>
-        /// <param name="file">The template file to use</param>
+        /// <param name="fileName">The template fileName to use</param>
         /// <param name="term">The search term we are looking for</param>
         /// <param name="size">The result set size</param>
         /// <param name="fields">The fields we are requesting</param>
         /// <param name="site">The sites to filter the results by</param>
         /// <returns>A SearchTemplateRequest</returns>
-        private SearchTemplateRequest<Suggest> GetSearchRequest(
+        private SearchTemplateRequest<T> GetSearchRequest<T>(
             string index,
-            string file,
+            string fileName,
             string term,
             int size,
             string fields,
             string site
-        ) {
+            ) where T : class {
 
-            SearchTemplateRequest<Suggest> expReq = new SearchTemplateRequest<Suggest>(index){
-                File = file
+            SearchTemplateRequest<T> expReq = new SearchTemplateRequest<T>(index){
+                File = fileName
             };
 
             expReq.Params = new Dictionary<string, object>();
@@ -268,12 +268,12 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.AutoSuggestControllerTests
                 term
             ); 
 
-            SearchTemplateRequest<Suggest> expReq = GetSearchRequest(
+            SearchTemplateRequest<Suggestion> expReq = GetSearchRequest<Suggestion>(
                 "cgov",                 // Search index to look in.
                 "autosg_suggest_cgov_en",  // Template name, preceded by the name of the directory it's stored in.
                 term,                   // Search term
                 10,                     // Max number of records to retrieve.
-                "\"url\", \"title\", \"metatag-description\", \"metatag-dcterms-type\"",
+                "\"url\", \"title\", \"metatag.description\", \"metatag.dcterms.type\"",
                 "all"
             );
 
