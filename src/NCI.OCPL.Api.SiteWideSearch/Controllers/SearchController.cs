@@ -17,6 +17,9 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
     [Route("[controller]")]
     public class SearchController : Controller
     {
+        // Static to limit to a single instance (can't do const for non-scalar types)
+        static readonly string[] validLanguages = { "en", "es" };
+
         private readonly IElasticClient _elasticClient;
         private readonly SearchIndexOptions _indexConfig;
         private readonly ILogger<SearchController> _logger;
@@ -44,15 +47,15 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
         /// <param name="collection">The search collection/strategy to use.  This defines the ES template to use.</param>
         /// <param name="language">The language to use. Only "en" and "es" are currently supported.</param>
         /// <param name="term">The search term to search for</param>
-        /// <param name="pagenum">The results page to retrieve</param>
-        /// <param name="numperpage">The number of items to retrieve per page</param>
+        /// <param name="from">The offset of results to retrieve</param>
+        /// <param name="size">The number of items to retrieve</param>
         /// <param name="site">An optional parameter used to limit the number of items returned based on site.</param>
         /// <returns>A SiteWideSearchResults collection object</returns>
-        [HttpGet("{collection}/{language}/{term}")]
+        [HttpGet("{collection}/{language}/{term?}")]
         public SiteWideSearchResults Get(
             string collection, 
             string language,
-            string term,             
+            string term = null,             
             [FromQuery] int from = 0,
             [FromQuery] int size = 10,
             [FromQuery] string site = "all" 
@@ -60,10 +63,18 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
         {
 
             if (string.IsNullOrWhiteSpace(collection))
-                throw new APIErrorException(400, "You must supply a collection name and term");
+                throw new APIErrorException(400, "You must supply a collection name");
 
-            if (string.IsNullOrWhiteSpace(term))
-                throw new APIErrorException(400, "You must supply a search term");
+            if (!validLanguages.Contains(language))
+                throw new APIErrorException(400, "Not a valid language code.");
+
+            if(string.IsNullOrWhiteSpace(term))
+            {
+                return new SiteWideSearchResults(
+                    0,
+                    new SiteWideSearchResult[0]
+                );
+            }
 
             //TODO: Access Logging with params
             //_logger.LogInformation("Search Request -- Term: {0}, Page{1} ", term, pagenum);
