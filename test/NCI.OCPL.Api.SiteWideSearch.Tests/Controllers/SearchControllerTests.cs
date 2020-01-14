@@ -388,10 +388,10 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         [InlineData("\n")]
         [InlineData("\r")]
         /// <summary>
-        /// Verify that controller throws the correct exception when no search text is specified.
+        /// Verify that controller returns no results when no search text is specified.
         /// </summary>
         /// <param name="termValue">A string the text to search for.</param>
-        public void Get_EmptyTerm_ReturnsError(String termValue)
+        public void Get_EmptyTerm_ReturnsNull(String termValue)
         {
             string testFile = "Search.CGov.En.BreastCancer.json";
 
@@ -402,18 +402,16 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
                 NullLogger<SearchController>.Instance
             );
 
-            Exception ex = Assert.Throws<APIErrorException>(
-                // Parameters don't matter, and for this test we don't care about saving the results
-                () =>
-                    ctrl.Get (
+            SiteWideSearchResults expectedRes = new SiteWideSearchResults(0, new SiteWideSearchResult[0]);
+            
+            SiteWideSearchResults actualRes = ctrl.Get (
                         "some collection",
                         "en",
                         termValue
-                    )
-                );
+                    );
 
             // Search without something to search for should report bad request (400) 
-            Assert.Equal(400, ((APIErrorException)ex).HttpStatusCode);
+            Assert.Equal(expectedRes.TotalResults, actualRes.TotalResults);
         }
 
     }
