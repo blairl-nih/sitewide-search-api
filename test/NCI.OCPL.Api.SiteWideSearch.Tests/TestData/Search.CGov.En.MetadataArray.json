@@ -1,0 +1,90 @@
+/*
+    Excerpt of CancerGov results for the word cancer, with an array of results
+    for the metadata description.
+
+    POST cgov/doc/_search/template
+    {
+
+        "file": "cgov_search_cgov_en",
+        "params": {
+            "my_value" : "cancer"
+            ,"my_size" : 20000
+            , "my_from" : 10000
+            ,"my_fields": "\"url\", \"title\", \"metatag.description\", \"metatag.dcterms.type\""
+            , "my_site": "all"
+        }
+    }
+*/
+{
+  "took": 67,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": 12915,
+    "max_score": 11.96958,
+    "hits": [
+      {
+        "_index": "sitewide_2020",
+        "_type": "doc",
+        "_id": "https://dceg2.cancer.gov/BrfAppForm.html",
+        "_score": 4.101241,
+        "_source": {
+          "metatag.description": [
+            "Summer Program Application",
+            "Summer Program Application for the Division of Cancer Epidemiology and Genetics (DCEG)"
+          ],
+          "metatag.dcterms.type": "cgvArticle",
+          "title": "DCEG - Summer Program Application - National Cancer Institute",
+          "url": "https://dceg2.cancer.gov/BrfAppForm.html"
+        }
+      },
+      {
+        "_index": "sitewide_2020",
+        "_type": "doc",
+        "_id": "https://healthcaredelivery.cancer.gov/",
+        "_score": 3.2414298,
+        "_source": {
+          "metatag.description": [
+            "",
+            "The vision of the Healthcare Delivery Research Program is patient-centered, evidence-based care that minimizes the burden of cancer on individuals and society."
+          ],
+          "title": "Healthcare Delivery Research Program",
+          "url": "https://healthcaredelivery.cancer.gov/"
+        }
+      },
+      {
+        "_index": "sitewide_2020",
+        "_type": "doc",
+        "_id": "https://dceg2.cancer.gov/cgi-bin-pubsearch/pubsearch/help.pl",
+        "_score": 2.296467,
+        "_source": {
+          "metatag.description": [
+            "DCEG investigators conduct multidisciplinary research to discover the genetic and environmental determinants of cancer and the means of prevention",
+            "Search of Publications Database for the Division of Cancer Epidemiology and Genetics (DCEG)\nof the National Cancer Institute (NCI), National Institutes of Health (NIH)."
+          ],
+          "metatag.dcterms.type": "cgvHomeLanding",
+          "url": "https://dceg2.cancer.gov/cgi-bin-pubsearch/pubsearch/help.pl"
+        }
+      },
+      {
+        "_index": "sitewide_2020",
+        "_type": "doc",
+        "_id": "https://epi.grants.cancer.gov/staff/johnson.html",
+        "_score": 4.347724,
+        "_source": {
+          "metatag.description": [
+            "",
+            "Jarrett A. Johnson, DrPH, MS, CHES is a Cancer Prevention Fellow in the Genomic Epidemiology Branch in the Epidemiology and Genomics Research Program at NCI."
+          ],
+          "title": "Jarrett A. Johnson, DrPH, MS, CHES - Cancer Prevention Fellow, GEB | EGRP/DCCPS/NCI/NIH",
+          "url": "https://epi.grants.cancer.gov/staff/johnson.html"
+        }
+      }
+    ]
+  }
+}

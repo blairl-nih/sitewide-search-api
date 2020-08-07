@@ -1,0 +1,35 @@
+/*
+    Parsed version of Search.CGov.En.MetadataArray.json.
+    Aside from the data being present, the first entry, and
+    only the first entry, from the metata.description field
+    should be present.
+*/
+{
+  "Results": [
+    {
+      "Title": "DCEG - Summer Program Application - National Cancer Institute",
+      "URL": "https://dceg2.cancer.gov/BrfAppForm.html",
+      "ContentType": "cgvArticle",
+      "Description": "Summer Program Application"
+    },
+    {
+      "Title": "Healthcare Delivery Research Program",
+      "URL": "https://healthcaredelivery.cancer.gov/",
+      "ContentType": null,
+      "Description": ""
+    },
+    {
+      "Title": null,
+      "URL": "https://dceg2.cancer.gov/cgi-bin-pubsearch/pubsearch/help.pl",
+      "ContentType": "cgvHomeLanding",
+      "Description": "DCEG investigators conduct multidisciplinary research to discover the genetic and environmental determinants of cancer and the means of prevention"
+    },
+    {
+      "Title": "Jarrett A. Johnson, DrPH, MS, CHES - Cancer Prevention Fellow, GEB | EGRP/DCCPS/NCI/NIH",
+      "URL": "https://epi.grants.cancer.gov/staff/johnson.html",
+      "ContentType": null,
+      "Description": ""
+    }
+  ],
+  "TotalResults": 12915
+}

@@ -1,0 +1,88 @@
+/*
+    Excerpt of CancerGov results for the word cancer, with single entries
+    for the metadata description.
+
+    POST cgov/doc/_search/template
+    {
+
+        "file": "cgov_search_cgov_en",
+        "params": {
+            "my_value" : "cancer"
+            ,"my_size" : 20000
+            , "my_from" : 10000
+            ,"my_fields": "\"url\", \"title\", \"metatag.description\", \"metatag.dcterms.type\""
+            , "my_site": "all"
+        }
+    }
+*/
+{
+  "took": 67,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": 12915,
+    "max_score": 11.96958,
+    "hits": [
+      {
+        "_index": "sitewide_2020",
+        "_type": "doc",
+        "_id": "https://epi.grants.cancer.gov/past-initiatives/libcsp/funding.html",
+        "_score": 4.3536105,
+        "_source": {
+          "metatag.description": "Funding information for the various studies that were part of the National Cancer Institute's Long Island Breast Cancer Study Project (LIBCSP).",
+          "title": "Long Island Breast Cancer Study Project - Funding (Past Initiative)| EGRP/DCCPS/NCI/NIH",
+          "url": "https://epi.grants.cancer.gov/past-initiatives/libcsp/funding.html"
+        }
+      },
+      {
+        "_index": "sitewide_2020",
+        "_type": "doc",
+        "_id": "https://frederick.cancer.gov/news/nivolumab-precision-medicine-sub-study-ends-encouraging-results",
+        "_score": 4.3536105,
+        "_source": {
+          "metatag.description": "FREDERICK, Md. -- The cancer drug nivolumab may be effective against more types of tumors than previously thought, according to results from a sub-study of the National Cancer Institute Molecular Analysis for Therapy Choice (NCI-MATCH), the world’s",
+          "title": "Nivolumab Precision Medicine Sub-study Ends with Encouraging Results | Frederick National Laboratory for Cancer Research",
+          "url": "https://frederick.cancer.gov/news/nivolumab-precision-medicine-sub-study-ends-encouraging-results"
+        }
+      },
+      {
+        "_index": "sitewide_2020",
+        "_type": "doc",
+        "_id": "https://epi.grants.cancer.gov/funding/cohorts/",
+        "_score": 4.353595,
+        "_source": {
+          "metatag.description": "Importance of cancer epidemiology cohorts, NCI support of cancer epidemiology cohorts, and frequently asked questions.",
+          "title": "Cancer Epidemiology Cohorts: Core Infrastructure and Methodological Research Funding Opportunity Announcement FAQs | EGRP/DCCPS/NCI/NIH",
+          "url": "https://epi.grants.cancer.gov/funding/cohorts/"
+        }
+      },
+      {
+        "_index": "sitewide_2020",
+        "_type": "doc",
+        "_id": "https://techtransfer.cancer.gov/availabletechnologies/e-053-2015",
+        "_score": 4.353445,
+        "_source": {
+          "metatag.description": "The proto-oncogene c-Myc is deregulated and overexpressed in ~70% of all cancers. Thus, c-Myc is an attractive therapeutic target. Beyond cancer, Myc is also a positive effector of tissue inflammation, and its function has been implicated in the pathophysiology of heart failure. Researchers at the National Cancer Institute (NCI) developed novel small molecules that target",
+          "title": "Small Molecule Anti-cancer Agents that Stabilize the MYC-G-Quadruplex | NCI Technology Transfer Center | TTC",
+          "url": "https://techtransfer.cancer.gov/availabletechnologies/e-053-2015"
+        }
+      },
+      {
+        "_index": "sitewide_2020",
+        "_type": "doc",
+        "_id": "https://progressreport.cancer.gov/node/74",
+        "_score": 4.35308,
+        "_source": {
+          "metatag.description": "The Cancer Trends Progress Report, first issued in 2001, summarizes our nation's advances against cancer in relation to Healthy People targets set forth by the Department of Health and Human Services.",
+          "title": "UV Exposure and Sun-Protective Behavior - Prevention Summary Table | Cancer Trends Progress Report",
+          "url": "https://progressreport.cancer.gov/node/74"
+        }
+      }
+    ]
+  }
+}

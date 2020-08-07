@@ -1,0 +1,39 @@
+/*
+    Parsed version of Search.CGov.En.MetadataSingle.json.
+    Only one value for metata.description field should be present.
+*/
+{
+  "Results": [
+    {
+      "Title": "Long Island Breast Cancer Study Project - Funding (Past Initiative)| EGRP/DCCPS/NCI/NIH",
+      "URL": "https://epi.grants.cancer.gov/past-initiatives/libcsp/funding.html",
+      "ContentType": null,
+      "Description": "Funding information for the various studies that were part of the National Cancer Institute's Long Island Breast Cancer Study Project (LIBCSP)."
+    },
+    {
+      "Title": "Nivolumab Precision Medicine Sub-study Ends with Encouraging Results | Frederick National Laboratory for Cancer Research",
+      "URL": "https://frederick.cancer.gov/news/nivolumab-precision-medicine-sub-study-ends-encouraging-results",
+      "ContentType": null,
+      "Description": "FREDERICK, Md. -- The cancer drug nivolumab may be effective against more types of tumors than previously thought, according to results from a sub-study of the National Cancer Institute Molecular Analysis for Therapy Choice (NCI-MATCH), the world’s"
+    },
+    {
+      "Title": "Cancer Epidemiology Cohorts: Core Infrastructure and Methodological Research Funding Opportunity Announcement FAQs | EGRP/DCCPS/NCI/NIH",
+      "URL": "https://epi.grants.cancer.gov/funding/cohorts/",
+      "ContentType": null,
+      "Description": "Importance of cancer epidemiology cohorts, NCI support of cancer epidemiology cohorts, and frequently asked questions."
+    },
+    {
+      "Title": "Small Molecule Anti-cancer Agents that Stabilize the MYC-G-Quadruplex | NCI Technology Transfer Center | TTC",
+      "URL": "https://techtransfer.cancer.gov/availabletechnologies/e-053-2015",
+      "ContentType": null,
+      "Description": "The proto-oncogene c-Myc is deregulated and overexpressed in ~70% of all cancers. Thus, c-Myc is an attractive therapeutic target. Beyond cancer, Myc is also a positive effector of tissue inflammation, and its function has been implicated in the pathophysiology of heart failure. Researchers at the National Cancer Institute (NCI) developed novel small molecules that target"
+    },
+    {
+      "Title": "UV Exposure and Sun-Protective Behavior - Prevention Summary Table | Cancer Trends Progress Report",
+      "URL": "https://progressreport.cancer.gov/node/74",
+      "ContentType": null,
+      "Description": "The Cancer Trends Progress Report, first issued in 2001, summarizes our nation's advances against cancer in relation to Healthy People targets set forth by the Department of Health and Human Services."
+    }
+  ],
+  "TotalResults": 12915
+}

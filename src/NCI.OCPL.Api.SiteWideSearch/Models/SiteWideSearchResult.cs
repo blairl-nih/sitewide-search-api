@@ -1,6 +1,6 @@
-using System;
-
 using Nest;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace NCI.OCPL.Api.SiteWideSearch
 {
@@ -12,7 +12,7 @@ namespace NCI.OCPL.Api.SiteWideSearch
     {
 
         /// <summary>
-        /// The title of this item 
+        /// The title of this item
         /// </summary>
         /// <returns></returns>
         [Text(Name = "title")]
@@ -37,6 +37,7 @@ namespace NCI.OCPL.Api.SiteWideSearch
         /// </summary>
         /// <returns></returns>
         [Text(Name = "metatag.description")]
+        [JsonConverter(typeof(MetadataDescriptionConverter))]
         public string Description { get; set; }
 
     }

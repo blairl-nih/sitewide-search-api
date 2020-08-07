@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Elasticsearch.Net;
 using Nest;
 
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using Moq;
@@ -22,17 +23,17 @@ using NCI.OCPL.Utils.Testing;
  the controller queries an ElasticSearch server.  As these are unit tests, we
  will not be connecting to a ES server.  So we are using the Moq framework for
  mocking up the methods in an IElasticClient.
- 
- 
- The primary method we use is the SearchTemplate method.  This calls an ElasticSearch 
- template (which is like a stored procedure).  Most of the tests will be for validating    
+
+
+ The primary method we use is the SearchTemplate method.  This calls an ElasticSearch
+ template (which is like a stored procedure).  Most of the tests will be for validating
  the parameters passed into the SearchTemplate method.  In order for the Nest library to
- provide a fluent interface in defining queries and parameters for templates, most methods           
- will take in an anonymous function for defining the parameters.  These functions usually          
- return an object that defines the request the client should send to the server.  
-          
- I note all of this since the class names are quite long and the code may start to get           
- funky looking.            
+ provide a fluent interface in defining queries and parameters for templates, most methods
+ will take in an anonymous function for defining the parameters.  These functions usually
+ return an object that defines the request the client should send to the server.
+
+ I note all of this since the class names are quite long and the code may start to get
+ funky looking.
 */
 
 using NCI.OCPL.Api.SiteWideSearch.Controllers;
@@ -40,8 +41,8 @@ using NCI.OCPL.Api.SiteWideSearch.Controllers;
 namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
 {
     /// <summary>
-    /// Defines a class with all of the query tests for the get method to ensure that the 
-    /// parameters passed into the SearchController are translated correctly into ES 
+    /// Defines a class with all of the query tests for the get method to ensure that the
+    /// parameters passed into the SearchController are translated correctly into ES
     /// requests.
     /// </summary>
     public class Get_QueryTests : TestControllerBase
@@ -95,7 +96,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
             ISearchTemplateRequest actualReq = null;
 
             //Setup the client with the request handler callback to be executed later.
-            IElasticClient client = 
+            IElasticClient client =
                 ElasticTools.GetMockedSearchTemplateClient<SiteWideSearchResult>(
                     req => actualReq = req,
                     resMock => {
@@ -115,7 +116,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
                 "cgov",
                 "en",
                 term
-            ); 
+            );
 
             SearchTemplateRequest<SiteWideSearchResult> expReq = GetSearchRequest(
                 "cgov",                 // Search index to look in.
@@ -128,7 +129,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
             );
 
             Assert.Equal(
-                expReq, 
+                expReq,
                 actualReq,
                 new ElasticTools.SearchTemplateRequestComparer()
             );
@@ -136,7 +137,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
     }
 
     /// <summary>
-    /// Defines a class with all of the data mapping tests to ensure we are able to correctly 
+    /// Defines a class with all of the data mapping tests to ensure we are able to correctly
     /// map the responses from ES into the correct response from the SearchController
     /// </summary>
     public class Get_DataMapTests : TestControllerBase
@@ -219,6 +220,35 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
             Assert.All(results.Results, item => Assert.NotNull(item));
         }
 
+        [Theory]
+        [InlineData("Search.CGov.En.MetadataArray.json", "Search.CGov.En.MetadataArray-Expected.json")]
+        [InlineData("Search.CGov.En.MetadataSingle.json", "Search.CGov.En.MetadataSingle-Expected.json")]
+        /// <summary>
+        /// Test that the metadata description field is handled correctly when
+        /// it contains an array of values instead of a single string.
+        /// </summary>
+        public void Check_Metadata_Description_Handling(string testFile, string expectedFile)
+        {
+            JObject expected = ElasticTools.GetDataFileAsJObject(expectedFile);
+
+            IOptions<SearchIndexOptions> config = GetMockSearchIndexConfig();
+            SearchController ctrl = new SearchController(
+                ElasticTools.GetInMemoryElasticClient(testFile),
+                config,
+                NullLogger<SearchController>.Instance
+            );
+
+            //Parameters don't matter in this case...
+            SiteWideSearchResults results = ctrl.Get(
+                "cgov",
+                "en",
+                "breast cancer"
+            );
+
+            JObject actual = JObject.Parse(JsonConvert.SerializeObject(results));
+            Assert.Equal(expected, actual, new JTokenEqualityComparer());
+        }
+
         [Fact]
         /// <summary>
         /// Test that the search results at arbitrary offsets
@@ -250,7 +280,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
 
 
     /// <summary>
-    /// Class to encapsulate all support code for testing optional fields  
+    /// Class to encapsulate all support code for testing optional fields
     /// </summary>
     public class OptionalFieldTests : TestControllerBase
     {
@@ -283,7 +313,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
 
             SiteWideSearchResult item = results.Results[offset];
             Assert.True(((Func<SiteWideSearchResult, Boolean>)nullTest)(item), fieldName);
-            
+
         }
 
         /// <summary>
@@ -298,7 +328,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
                 };
 
     }
-    
+
 
     /// <summary>
     /// Defines tests of SearchController error behavior.
@@ -337,7 +367,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
                     )
                 );
 
-            // Failed search request should always report 500. 
+            // Failed search request should always report 500.
             Assert.Equal(500, ((APIErrorException)ex).HttpStatusCode);
         }
 
@@ -355,7 +385,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
         public void Get_EmptyCollection_ReturnsError(String collectionValue)
         {
             // The file needs to exist so it can be deserialized, but we don't make
-            // use of the actual content. 
+            // use of the actual content.
             string testFile = "Search.CGov.En.BreastCancer.json";
 
             IOptions<SearchIndexOptions> config = GetMockSearchIndexConfig();
@@ -375,7 +405,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
                     )
                 );
 
-            // Search without a collection should report bad request (400) 
+            // Search without a collection should report bad request (400)
             Assert.Equal(400, ((APIErrorException)ex).HttpStatusCode);
         }
 
@@ -403,14 +433,14 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
             );
 
             SiteWideSearchResults expectedRes = new SiteWideSearchResults(0, new SiteWideSearchResult[0]);
-            
+
             SiteWideSearchResults actualRes = ctrl.Get (
                         "some collection",
                         "en",
                         termValue
                     );
 
-            // Search without something to search for should report bad request (400) 
+            // Search without something to search for should report bad request (400)
             Assert.Equal(expectedRes.TotalResults, actualRes.TotalResults);
         }
 
