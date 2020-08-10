@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -48,13 +49,13 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
         /// Collection is of the form {sitename}_{lang_code}.  Currently, {sitename} is always "cgov" and {lang_code} may
         /// be either "en" (English) or "es" (Español).
         /// </remarks>
-        [HttpGet("{collection}/{language}/{term}")]
+        [HttpGet("{collection}/{language}/{*term}")]
 
         public Suggestions Get(
             string collection,
             string language,
             string term,
-            [FromQuery] int size = 10 
+            [FromQuery] int size = 10
             )
         {
             if (string.IsNullOrWhiteSpace(collection))
@@ -66,12 +67,15 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
             if (string.IsNullOrWhiteSpace(term))
                 throw new APIErrorException(400, "You must supply a search term");
 
+            // Term comes from from a catch-all parameter, so make sure it's been decoded.
+            term = WebUtility.UrlDecode(term);
+
             // Setup our template name based on the collection name.  Template name is the directory the
             // file is stored in, an underscore, the template name prefix (search), an underscore,
             // the name of the collection (only "cgov" at this time), another underscore and then
             // the language code (either "en" or "es").
             string templateName = String.Format("autosg_suggest_{0}_{1}", collection, language);
-            
+
 
             //TODO: Catch Exception
             var response = _elasticClient.SearchTemplate<Suggestion>(sd => sd
@@ -91,7 +95,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
 
             } else {
                 throw new APIErrorException(500, "Error connecting to search servers");
-            }        
+            }
         }
 
 
