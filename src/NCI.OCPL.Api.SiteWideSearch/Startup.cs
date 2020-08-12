@@ -21,16 +21,32 @@ using NJsonSchema;
 
 namespace NCI.OCPL.Api.SiteWideSearch
 {
+    /// <summary>
+    /// Defines the configuration for the Sitewide Search API.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:NCI.OCPL.Api.SiteWideSearch.Startup"/> class.
+        /// </summary>
+        /// <param name="configuration">configuration</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
+        /// <value>The configuration.</value>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Configures the services.
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <returns>The services.</returns>
+        /// <param name="services">Services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -52,9 +68,9 @@ namespace NCI.OCPL.Api.SiteWideSearch
             //
             // AddTransient means that it will instantiate a new instance of our client
             // for each instance of the controller.  So the function below will be called
-            // on each request.   
+            // on each request.
             services.AddTransient<IElasticClient>(p => {
-                
+
                 // Get the ElasticSearch servers that we will be connecting to.
                 // Ideally, we'd load Configuration via the Dependency Injection framework,
                 // but this will work for now.
@@ -63,7 +79,7 @@ namespace NCI.OCPL.Api.SiteWideSearch
 
                 List<Uri> uris = GetServerUriList();
 
-                // Create the connection pool, the SniffingConnectionPool will 
+                // Create the connection pool, the SniffingConnectionPool will
                 // keep tabs on the health of the servers in the cluster and
                 // probe them to ensure they are healthy.  This is how we handle
                 // redundancy and load balancing.
@@ -75,9 +91,9 @@ namespace NCI.OCPL.Api.SiteWideSearch
                     .BasicAuthentication(username, password);
 
                 if (Configuration.GetValue<bool>("Elasticsearch:EnableDebugging", false)) {
-                    settings = settings.DisableDirectStreaming();                   
+                    settings = settings.DisableDirectStreaming();
                 }
-                                                                
+
                 return new ElasticClient(settings);
             });
 
@@ -85,7 +101,12 @@ namespace NCI.OCPL.Api.SiteWideSearch
             services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">The application builder.</param>
+        /// <param name="env">The hosting environment.</param>
+        /// <param name="loggerFactory">Factory for creating loggers.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -135,7 +156,7 @@ namespace NCI.OCPL.Api.SiteWideSearch
                         //display the issue.
                         string message = "Errors have occurred.  Type: " + ex.GetType().ToString();
 
-                        //Our own exceptions should be sanitized enough.                        
+                        //Our own exceptions should be sanitized enough.
                         if (ex is APIErrorException) {
                             context.Response.StatusCode = ((APIErrorException)ex).HttpStatusCode;
                             message = ex.Message;
@@ -162,20 +183,20 @@ namespace NCI.OCPL.Api.SiteWideSearch
         }
 
         /// <summary>
-        /// Retrieves a list of Elasticsearch server URIs from the configuration's Elasticsearch:Servers setting. 
+        /// Retrieves a list of Elasticsearch server URIs from the configuration's Elasticsearch:Servers setting.
         /// </summary>
         /// <returns>Returns a list of one or more Uri objects representing the configured set of Elasticsearch servers</returns>
         /// <remarks>
         /// The configuration's Elasticsearch:Servers property is required to contain URIs for one or more Elasticsearch servers.
         /// Each URI must include a protocol (http or https), a server name, and optionally, a port number.
         /// Multiple URIs are separated by a comma.  (e.g. "https://fred:9200, https://george:9201, https://ginny:9202")
-        /// 
+        ///
         /// Throws ConfigurationException if no servers are configured.
         ///
         /// Throws UriFormatException if any of the configured server URIs are not formatted correctly.
         /// </remarks>
         private List<Uri> GetServerUriList(){
-            List<Uri> uris = new List<Uri>(); 
+            List<Uri> uris = new List<Uri>();
 
             string serverList = Configuration["Elasticsearch:Servers"];
             if(!String.IsNullOrWhiteSpace(serverList))

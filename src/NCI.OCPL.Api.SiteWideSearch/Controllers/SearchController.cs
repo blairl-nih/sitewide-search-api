@@ -25,13 +25,17 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
         private readonly SearchIndexOptions _indexConfig;
         private readonly ILogger<SearchController> _logger;
 
+        /// <summary>
+        /// Message to return for a "healthy" status.
+        /// </summary>
         public const string HEALTHY_STATUS = "alive!";
 
         /// <summary>
         /// Creates a new instance of a Search Controller
         /// </summary>
-        /// <param name="elasticClient">An instance of an IElasticClient to use for connecting to the ElasticSearch cluster</param>
-        /// <param name="logger">An instance of a ILogger to use for logging messages</param>
+        /// <param name="elasticClient">An instance of an IElasticClient to use for connecting to the ElasticSearch cluster.</param>
+        /// <param name="config">The search configuration.</param>
+        /// <param name="logger">An instance of a ILogger to use for logging messages.</param>
         public SearchController(IElasticClient elasticClient,
             IOptions<SearchIndexOptions> config,
             ILogger<SearchController> logger)

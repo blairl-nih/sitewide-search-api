@@ -9,11 +9,15 @@ namespace NCI.OCPL.Api.SiteWideSearch
     public class ErrorMessage
     {
         /// <summary>
-        /// The message to display 
+        /// The message to display
         /// </summary>
         /// <returns></returns>
         public string Message { get; set; }
 
+        /// <summary>
+        /// Returns the error message as a JSON string.
+        /// </summary>
+        /// <returns>JSON structure.</returns>
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);

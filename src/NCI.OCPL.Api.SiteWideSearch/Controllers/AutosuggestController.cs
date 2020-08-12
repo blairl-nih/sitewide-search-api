@@ -25,8 +25,17 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
         private readonly AutosuggestIndexOptions _indexConfig;
         private readonly ILogger<AutosuggestController> _logger;
 
+        /// <summary>
+        /// Message to return for a "healthy" status.
+        /// </summary>
         public const string HEALTHY_STATUS = "alive!";
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="elasticClient">An Elasticsearch client instance.</param>
+        /// <param name="config">Configuration.</param>
+        /// <param name="logger">The logger.</param>
         public AutosuggestController(IElasticClient elasticClient,
             IOptions<AutosuggestIndexOptions> config,
             ILogger<AutosuggestController> logger)

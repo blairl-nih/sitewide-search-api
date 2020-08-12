@@ -2,6 +2,9 @@ using Nest;
 
 namespace NCI.OCPL.Api.SiteWideSearch
 {
+    /// <summary>
+    /// Represents a single Autosuggest suggestion.
+    /// </summary>
     [ElasticsearchType(Name = "terms")]
     public class Suggestion
     {
