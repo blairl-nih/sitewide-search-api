@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -51,14 +52,14 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
         /// <param name="size">The number of items to retrieve</param>
         /// <param name="site">An optional parameter used to limit the number of items returned based on site.</param>
         /// <returns>A SiteWideSearchResults collection object</returns>
-        [HttpGet("{collection}/{language}/{term?}")]
+        [HttpGet("{collection}/{language}/{*term}")]
         public SiteWideSearchResults Get(
-            string collection, 
+            string collection,
             string language,
-            string term = null,             
+            string term = null,
             [FromQuery] int from = 0,
             [FromQuery] int size = 10,
-            [FromQuery] string site = "all" 
+            [FromQuery] string site = "all"
             )
         {
 
@@ -68,6 +69,9 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
             if (!validLanguages.Contains(language))
                 throw new APIErrorException(400, "Not a valid language code.");
 
+            // The catch-all parameter can match the empty string, effectively giving us
+            // the {collection}/{language} route as well. We want to handle searches
+            // for "nothing" by returning nothing, no need to invoke Elasticsearch.
             if(string.IsNullOrWhiteSpace(term))
             {
                 return new SiteWideSearchResults(
@@ -78,6 +82,9 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
 
             //TODO: Access Logging with params
             //_logger.LogInformation("Search Request -- Term: {0}, Page{1} ", term, pagenum);
+
+            // Term comes from from a catch-all parameter, so make sure it's been decoded.
+            term = WebUtility.UrlDecode(term);
 
             // Setup our template name based on the collection name.  Template name is the directory the
             // file is stored in, an underscore, the template name prefix (search), an underscore,
@@ -101,7 +108,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
                     .Add("my_fields", fields)
                     .Add("my_site", site)
                 )
-            );   
+            );
 
             if (response.IsValid) {
                 return new SiteWideSearchResults(
@@ -111,7 +118,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
 
             } else {
                 throw new APIErrorException(500, "Error connecting to search servers");
-            }            
+            }
         }
 
 
