@@ -69,9 +69,14 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.SearchControllerTests
             string site
         ) {
 
+            // ISearchTemplateRequest.File is obsolete.
+            // Refactoring to remove this dependency is recorded as issue #28
+            // https://github.com/NCIOCPL/sitewide-search-api/issues/28
+#pragma warning disable CS0618
             SearchTemplateRequest<SiteWideSearchResult> expReq = new SearchTemplateRequest<SiteWideSearchResult>(index){
                 File = fileName
             };
+#pragma warning restore CS0618
 
             expReq.Params = new Dictionary<string, object>();
             expReq.Params.Add("my_value", term);

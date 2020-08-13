@@ -168,11 +168,16 @@ namespace NCI.OCPL.Utils.Testing
                     return false;
                 }
 
+                // ISearchTemplateRequest.File is obsolete.
+                // Refactoring to remove this dependency is recorded as issue #28
+                // https://github.com/NCIOCPL/sitewide-search-api/issues/28
+#pragma warning disable CS0618
                 //Initial test is that both objects are not null.
                 bool isEqual =
                     x.Id == y.Id &&
                     x.File == y.File &&
-                     x.Inline == y.Inline;
+                    x.Inline == y.Inline;
+#pragma warning restore CS0618
 
                 if (isEqual)
                 {

@@ -101,6 +101,10 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
             // Setup the list of fields we want ES to return.
             string fields = "\"url\", \"title\", \"metatag.description\", \"metatag.dcterms.type\"";
 
+            // ISearchTemplateRequest.File is obsolete.
+            // Refactoring to remove this dependency is recorded as issue #28
+            // https://github.com/NCIOCPL/sitewide-search-api/issues/28
+#pragma warning disable CS0618
             //thios Can throw exception
             var response = _elasticClient.SearchTemplate<SiteWideSearchResult>(sd => sd
                 .Index(_indexConfig.AliasName)
@@ -113,6 +117,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Controllers
                     .Add("my_site", site)
                 )
             );
+#pragma warning restore CS0618
 
             if (response.IsValid) {
                 return new SiteWideSearchResults(

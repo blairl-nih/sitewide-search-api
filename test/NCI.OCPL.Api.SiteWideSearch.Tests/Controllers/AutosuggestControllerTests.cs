@@ -19,23 +19,23 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.AutoSuggestControllerTests
     /// the controller queries an ElasticSearch server.  As these are unit tests, we
     /// will not be connecting to a ES server.  So we are using the Moq framework for
     /// mocking up the methods in an IElasticClient.
-    /// 
-    /// 
-    /// The primary method we use is the SearchTemplate method.  This calls an ElasticSearch 
-    /// template (which is like a stored procedure).  Most of the tests will be for validating    
+    ///
+    ///
+    /// The primary method we use is the SearchTemplate method.  This calls an ElasticSearch
+    /// template (which is like a stored procedure).  Most of the tests will be for validating
     /// the parameters passed into the SearchTemplate method.  In order for the Nest library to
-    /// provide a fluent interface in defining queries and parameters for templates, most methods           
-    /// will take in an anonymous function for defining the parameters.  These functions usually          
-    /// return an object that defines the request the client should send to the server.  
-    ///          
-    /// I note all of this since the class names are quite long and the code may start to get           
-    /// funky looking.            
+    /// provide a fluent interface in defining queries and parameters for templates, most methods
+    /// will take in an anonymous function for defining the parameters.  These functions usually
+    /// return an object that defines the request the client should send to the server.
+    ///
+    /// I note all of this since the class names are quite long and the code may start to get
+    /// funky looking.
     /// </remarks>
     /// </summary>
 
 
     /// <summary>
-    /// Defines a class with all of the data mapping tests to ensure we are able to correctly 
+    /// Defines a class with all of the data mapping tests to ensure we are able to correctly
     /// map the responses from ES into the correct response from the AutosuggestController
     /// </summary>
     public class Get_DataMapTests : AutosuggestTests_Base
@@ -60,9 +60,14 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.AutoSuggestControllerTests
             string site
             ) where T : class {
 
+            // ISearchTemplateRequest.File is obsolete.
+            // Refactoring to remove this dependency is recorded as issue #28
+            // https://github.com/NCIOCPL/sitewide-search-api/issues/28
+#pragma warning disable CS0618
             SearchTemplateRequest<T> expReq = new SearchTemplateRequest<T>(index){
                 File = fileName
             };
+#pragma warning restore CS0618
 
             expReq.Params = new Dictionary<string, object>();
             expReq.Params.Add("searchstring", term);
@@ -232,7 +237,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.AutoSuggestControllerTests
 
         // TODO: Add tests for varying the various parameters.
         // TODO: Move Check_For_Correct_Request_Data() and variants
-        //       to a separate class 
+        //       to a separate class
 
         [Fact]
         /// <summary>
@@ -245,7 +250,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.AutoSuggestControllerTests
             ISearchTemplateRequest actualReq = null;
 
             //Setup the client with the request handler callback to be executed later.
-            IElasticClient client = 
+            IElasticClient client =
                 ElasticTools.GetMockedSearchTemplateClient<Suggestion>(
                     req => actualReq = req,
                     resMock => {
@@ -266,7 +271,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.AutoSuggestControllerTests
                 "cgov",
                 "en",
                 term
-            ); 
+            );
 
             SearchTemplateRequest<Suggestion> expReq = GetSearchRequest<Suggestion>(
                 "cgov",                 // Search index to look in.
@@ -278,7 +283,7 @@ namespace NCI.OCPL.Api.SiteWideSearch.Tests.AutoSuggestControllerTests
             );
 
             Assert.Equal(
-                expReq, 
+                expReq,
                 actualReq,
                 new ElasticTools.SearchTemplateRequestComparer()
             );
