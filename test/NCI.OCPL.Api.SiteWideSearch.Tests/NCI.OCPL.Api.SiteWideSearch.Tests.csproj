@@ -25,7 +25,7 @@
     <PackageReference Include="Moq" Version="4.8.2" />
     <PackageReference Include="RichardSzalay.MockHttp" Version="3.3.0" />
     <PackageReference Include="coverlet.msbuild" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
+    <PackageReference AllowExplicitVersion="True" Include="Microsoft.AspNetCore.App" Version="2.1.4" />
   </ItemGroup>
 
 </Project>

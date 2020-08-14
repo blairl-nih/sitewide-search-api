@@ -16,7 +16,7 @@
   <ItemGroup>
     <PackageReference Include="NEST" Version="5.6.1" />
     <PackageReference Include="NSwag.AspNetCore" Version="11.17.1" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
+    <PackageReference AllowExplicitVersion="True" Include="Microsoft.AspNetCore.App" Version="2.1.4" />
   </ItemGroup>
 
 </Project>
